@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+
+    <h2>Javascript Validation Form</h2>
+    <form name="Form" onsubmit="return validateForm()">
+        Name: <input type="text" id="name" name="name"><br><br>
+        Email: <input type="text" id="email" name="email"><br><br>
+        Age: <input type="text" id="age" name="age"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <table border="1" id="dataTable">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+        </tr>
+    </table>
+    <script>
+        function validateForm() {
+            const name = document.forms["Form"]["name"].value;
+            const email = document.forms["Form"]["email"].value;
+            const age = document.forms["Form"]["age"].value;
+
+            if (name === "") {
+                alert("Name must be filled out");
+                return false;
+            }
+
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            if (isNaN(age) || age === "") {
+                alert("Please enter a valid age");
+                return false;
+            }
+
+            adddataintable(name, email, age);
+
+            
+            return false;
+        }
+
+        function adddataintable(name, email, age) {
+            const table = document.getElementById("dataTable");
+            const newRow = table.insertRow();
+
+            const nameCell = newRow.insertCell(0);
+            const emailCell = newRow.insertCell(1);
+            const ageCell = newRow.insertCell(2);
+
+            nameCell.innerText = name;
+            emailCell.innerText = email;
+            ageCell.innerText = age;
+        }
+    </script>
+
+</body>
+</html>
